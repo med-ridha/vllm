@@ -25,4 +25,6 @@ jobs:
 
       - name: Run docker build
         run: |
-          docker build -f docker/Dockerfile.cpu --tag vllm-cpu-env --target vllm-openai .
+          docker build -f docker/Dockerfile.cpu --tag ghrc.io/${{ secrets.DOCKER_USERNAME }}/vllm-cpu-env --target vllm-openai .
+          docker login  --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_TOKEN }}
+          docker push ghrc.io/${{ secrets.DOCKER_USERNAME }}/vllm-cpu-env
